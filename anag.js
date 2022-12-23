@@ -69,9 +69,7 @@ const origOrder = (wordLengths, sol) => {
   return res.join(" ");
 };
 
-let wordLengths = [6, 6, 7];
-let res = multi("dsrsiagoeuemionnrsc", wordLengths);
-res.sort(function (a, b) {
-  return a.localeCompare(b);
-});
+let wordLengths = [4, 3, 4];
+let res = multi("tcfairkmeoe", wordLengths);
+res.sort((a, b) => a[0].localeCompare(b[0]));
 res.forEach((e) => console.log(origOrder(wordLengths, e)));
