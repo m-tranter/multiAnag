@@ -1,6 +1,7 @@
 const { dictionary } = require("./newDict.js");
 
 const freq = (word) => {
+  // Returns an object with the letter frequencies of a string.
   return Array.from(word).reduce((f, ch) => {
     f[ch] = f[ch] ? f[ch] + 1 : 1;
     return f;
@@ -8,11 +9,13 @@ const freq = (word) => {
 };
 
 const remover = (freq, word) => {
-  let temp = structuredClone(freq);
-  word.split("").forEach((e) => {
-    temp[e] -= 1;
-  });
-  return temp;
+  return Array.from(word).reduce(
+    (f, ch) => {
+      f[ch] -= 1;
+      return f;
+    },
+    { ...freq }
+  );
 };
 
 const isSubString = (origFreq, candFreq) => {
