@@ -1,11 +1,10 @@
 const { dictionary } = require("./newDict.js");
 
 const freq = (word) => {
-  let obj = {};
-  Array.from(word).forEach((c) => {
-    obj[c] = obj[c] ? obj[c] + 1 : 1;
-  });
-  return obj;
+  return Array.from(word).reduce((f, ch) => {
+    f[ch] = f[ch] ? f[ch] + 1 : 1;
+    return f;
+  }, {});
 };
 
 const remover = (freq, word) => {
