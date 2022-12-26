@@ -9,6 +9,7 @@ const freq = (word) => {
 };
 
 const remover = (freq, word) => {
+  // Returns an updated frequency with letters of word decremented.
   return Array.from(word).reduce(
     (f, ch) => {
       f[ch] -= 1;
@@ -22,56 +23,48 @@ const isSubString = (origFreq, candFreq) => {
   return Object.keys(candFreq).every((k) => origFreq[k] >= candFreq[k]);
 };
 
+const origOrder = (wordLengths, sol) => {
+  return wordLengths
+    .reduce((acc, w) => {
+      let temp = sol.findIndex((e) => e.length === w);
+      acc.push(sol[temp]);
+      sol.splice(temp, 1);
+      return acc;
+    }, [])
+    .join(" ");
+};
+
+const getCands = (len, strFreq) => {
+  return dictionary[len - 1].filter((e) => isSubString(strFreq, e.f));
+};
+
 const multi = (str, wordLens) => {
-  let arr = [...wordLens].sort().reverse();
-  const sols = [];
-  const findSols = (strFreq, cands, candInd, wordInd, sol) => {
-    if (cands.length === 0) {
-      return;
+  const findSols = (strFreq, cand, wordInd, sol) => {
+    sol.push(cand.word);
+    console.log(sol);
+    if (sol.length === arr.length) {
+      return sol;
     }
-    let tempSol = sol.concat(cands[candInd].word);
-    if (tempSol.length === arr.length) {
-      sols.push(tempSol);
-    }
-    if (candInd < cands.length - 1) {
-      findSols(strFreq, cands, candInd + 1, wordInd, sol);
-    }
-    if (wordInd < arr.length - 1) {
-      let tempFreq = remover(strFreq, cands[candInd].word);
-      findSols(
-        tempFreq,
-        dictionary[arr[wordInd + 1] - 1].filter((e) =>
-          isSubString(tempFreq, e.f)
-        ),
-        0,
-        wordInd + 1,
-        tempSol
-      );
+    if (wordInd + 1 < arr.length) {
+      const tempFreq = remover(strFreq, cand.word);
+      return getCands(arr[wordInd + 1], tempFreq).reduce((acc, cand) => {
+        let temp = findSols(tempFreq, cand, wordInd + 1, sol);
+        if (temp !== undefined) {
+          return acc.concat(...temp);
+        }
+      }, []);
     }
   };
 
-  let strFreq = freq(str);
-  findSols(
-    strFreq,
-    dictionary[arr[0] - 1].filter((e) => isSubString(strFreq, e.f)),
-    0,
-    0,
-    []
-  );
-  return sols;
+  const arr = [...wordLens].sort().reverse();
+  const strFreq = freq(str);
+  return getCands(arr[0], strFreq).reduce((acc, cand) => {
+    return acc.concat(findSols(strFreq, cand, 0, []));
+  }, []);
 };
 
-const origOrder = (wordLengths, sol) => {
-  res = [];
-  wordLengths.forEach((w) => {
-    let temp = sol.findIndex((e) => e.length === w);
-    res.push(sol[temp]);
-    sol.splice(temp, 1);
-  });
-  return res.join(" ");
-};
-
-let wordLengths = [4, 3, 4];
-let res = multi("tcfairkmeoe", wordLengths);
-res.sort((a, b) => a[0].localeCompare(b[0]));
-res.forEach((e) => console.log(origOrder(wordLengths, e)));
+let wordLengths = [1, 2, 1, 4];
+let res = multi("iamaboss", wordLengths);
+//res.sort((a, b) => a[0].localeCompare(b[0]));
+//res.forEach((e) => console.log(origOrder(wordLengths, e)));
+console.log(res[0]);
