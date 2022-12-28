@@ -26,6 +26,17 @@ const getCands = (len, strFreq) => {
   return dictionary[len - 1].filter((e) => isSubString(strFreq, e.f));
 };
 
+const origOrder = (wordLengths, sol) => {
+  return wordLengths
+    .reduce((acc, w) => {
+      const temp = sol.findIndex((e) => e.length === w);
+      acc.push(sol[temp]);
+      sol.splice(temp, 1);
+      return acc;
+    }, [])
+    .join(" ");
+};
+
 const multi = (str, wordLens) => {
   const findSols = (strFreq, cands, candInd, wordInd, sol) => {
     if (!cands.length) {
@@ -57,18 +68,7 @@ const multi = (str, wordLens) => {
   return sols;
 };
 
-const origOrder = (wordLengths, sol) => {
-  return wordLengths
-    .reduce((acc, w) => {
-      const temp = sol.findIndex((e) => e.length === w);
-      acc.push(sol[temp]);
-      sol.splice(temp, 1);
-      return acc;
-    }, [])
-    .join(" ");
-};
-
-const wordLengths = [7, 5];
+const wordLengths = [5, 7];
 const res = multi("seasidezebra", wordLengths);
 res.sort((a, b) => a[0].localeCompare(b[0]));
 res.forEach((e) => console.log(origOrder(wordLengths, e)));
