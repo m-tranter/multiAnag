@@ -33,7 +33,7 @@ const makeH2 = (str) => {
 };
 
 const findWords = () => {
-  let str = strInput.value.toLowerCase().replace(/\s/g, "");
+  let str = strInput.value.replace(/[^A-Za-z\s]/g, "").toLowerCase();
   let pattern = patternInput.value.toLowerCase().replace(/\s/g, "").split(",");
   let lengths;
   let info;
