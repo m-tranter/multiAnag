@@ -34,7 +34,7 @@ const makeH2 = (str) => {
 
 const findWords = () => {
   let str = strInput.value.toLowerCase().replace(/\s/g, "");
-  let pattern = patternInput.value.split(",");
+  let pattern = patternInput.value.toLowerCase().replace(/\s/g, "").split(",");
   let lengths;
   let info;
   lengths = lengthsInput.value.split(",").map((e) => parseInt(e));
