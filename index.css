@@ -1,0 +1,22 @@
+body {
+  background-color: Wheat;
+  margin: 0;
+  font-family: serif;
+}
+
+h1,
+li {
+  color: Navy;
+}
+h2,
+label {
+  color: Green;
+}
+li {
+  font-size: 2rem;
+}
+input,
+button,
+label {
+  font-size: 1.5rem;
+}

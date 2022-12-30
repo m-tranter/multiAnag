@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link
+      href="./index.css"
+      rel="stylesheet"
+      <meta
+      name="theme-color"
+      content="#000000"
+    />
+    <title>Multi-word Anagrams</title>
+  </head>
+  <body>
+    <div class="container mt-3">
+      <h1>Multi-word Anagrams</h1>
+      <p>
+        <input
+          id="strInput"
+          type="text"
+          size="30"
+          placeholder="Enter letters."
+        />
+      </p>
+      <p>
+        <input
+          id="lengthsInput"
+          type="text"
+          size="30"
+          placeholder="Enter word lengths."
+        />
+        <label class="ms-1" for="lengthsInput">Separate with commas.</label>
+      </p>
+      <p>
+        <input
+          type="text"
+          id="patternInput"
+          size="30"
+          placeholder="Enter known letter locations."
+        />
+        <label class="ms-1" for="patternInput"
+          >Use '?' for unknown letters.</label
+        >
+      </p>
+      <p>
+        <button id="goBtn" type="button">Go!</button>
+      </p>
+      <hr />
+      <div id="display"></div>
+    </div>
+    <script src="./newDict.js"></script>
+    <script src="./anag.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
