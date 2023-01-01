@@ -64,9 +64,13 @@ const findWords = () => {
   display.appendChild(makeH2("Working."));
   setTimeout(() => {
     const res = multi(str, info).reduce((acc, sol) => {
-      acc.push(origOrder(lengths, sol));
+      let temp = origOrder(lengths, sol);
+      if (!acc.includes(temp)) {
+        acc.push(temp);
+      }
       return acc;
     }, []);
+    res.sort();
     display.innerHTML = "";
     display.appendChild(res.length ? makeList(res) : makeH2("Nothing found."));
   }, 0);
@@ -179,7 +183,6 @@ const multi = (str, arr) => {
   const sols = [];
   const strFreq = freq(str);
   findSols(strFreq, getCands(arr[0], strFreq), 0, 1, []);
-  sols.sort((a, b) => a[0].localeCompare(b[0]));
   return sols;
 };
 
